@@ -1,0 +1,58 @@
+So you want to write a Jquery plugin. If you know jQuery and Coffeescript, this would be amazingly easy.
+
+I will walk you through writing a jQuery plugin which will allow us to add alternating colors to alternating rows.
+
+Here is the plugin in its entirety.
+
+    $ = jQuery
+    $.fn.zebraTable = (options)->
+        defaults = 
+            evenColor: '#ccc',
+            oddColor: '#eee'
+    
+        options = $.extend(defaults, options)
+        return @.each( ->
+            $("tr:even", @).css('background-color', options.evenColor);               
+            $("tr:odd", @).css('background-color', options.oddColor);                   
+            )
+
+
+Lets look at what we did.
+
+1. We bound $ to jQuery object.
+2. We created an anonymous functions and added this to jQuery, by assigning it to ` $.fn.zebraTable`
+3. After this we will be able to do `$("selector").zebraTable()` or `$(selector).zerbraTable(optionsDict)
+4. This function will set background-color on alternating rows.
+
+Lets look at the compiled Javascipt output
+
+    (function() {
+      var $;
+
+      $ = jQuery;
+
+      $.fn.zebraTable = function(options) {
+        var defaults;
+        defaults = {
+          evenColor: '#ccc',
+          oddColor: '#eee'
+        };
+        options = $.extend(defaults, options);
+        return this.each(function() {
+          $("tr:even", this).css('background-color', options.evenColor);
+          return $("tr:odd", this).css('background-color', options.oddColor);
+        });
+      };
+
+
+    }).call(this);
+    
+And you can call it like this.
+
+    $(function() {
+      $("table").zebraTable(  {
+          evenColor: 'red',
+          oddColor: 'yellow'
+        });
+    });
+
