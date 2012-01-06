@@ -17,10 +17,7 @@
   };
 
   $(function() {
-    return ($("table")).zebraTable(  {
-        evenColor: 'red',
-        oddColor: 'yellow'
-      });
+    return $("table").zebraTable();
   });
 
 }).call(this);
