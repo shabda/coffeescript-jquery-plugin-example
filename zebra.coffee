@@ -1,17 +1,14 @@
-$ = jQuery
-$.fn.zebraTable = (options)->
-    defaults = 
-        evenColor: '#ccc',
-        oddColor: '#eee'
+do ($ = jQuery) ->
+    $.fn.zebraTable = (options) ->
+        defaults = 
+            evenColor: '#ccc'
+            oddColor : '#eee'
     
-    options = $.extend(defaults, options)
-    return @.each( ->
-        $("tr:even", @).css('background-color', options.evenColor);               
-        $("tr:odd", @).css('background-color', options.oddColor);                   
-        )
+        options = $.extend(defaults, options)
+        @each ->
+            $("tr:even", this).css('background-color', options.evenColor)
+            $("tr:odd" , this).css('background-color', options.oddColor)
 
 
 
-$(-> 
-    ($ "table").zebraTable()   
-)
+$ -> $("table").zebraTable()
